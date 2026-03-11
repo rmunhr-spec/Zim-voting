@@ -135,7 +135,7 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(22px,4.5vw,48px);font-w
     <div class="sub">Official Voting Platform</div>
     <div class="loc">18 April 2026 &middot; Nanjing, China</div>
   </div>
-  <div class="deadline">Nomination deadline: <strong>25 March 2026</strong> &nbsp;&middot;&nbsp; Contact: mulanfelyjiuqi@sina.cn</div>
+  <div class="deadline">Nomination deadline: <strong>25 March 2026</strong> &nbsp;&middot;&nbsp; Contact: <span id="em"></span></div>
 
   <!-- LIVE CONNECTION STATUS -->
   <div class="conn-bar connecting" id="conn-bar">
@@ -147,7 +147,7 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(22px,4.5vw,48px);font-w
   <div class="stats-bar">
     <div class="stat"><span class="stat-num" id="stat-nominees">0</span><span class="stat-lbl">Nominees</span></div>
     <div class="stat"><span class="stat-num" id="stat-votes">0</span><span class="stat-lbl">Total Votes</span></div>
-    <div class="stat"><span class="stat-num">26</span><span class="stat-lbl">Awards</span></div>
+    <div class="stat"><span class="stat-num">29</span><span class="stat-lbl">Awards</span></div>
     <div class="stat"><span class="stat-num" id="stat-voted">0</span><span class="stat-lbl">Your Votes</span></div>
   </div>
   <div class="view-toggle">
@@ -187,10 +187,10 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(22px,4.5vw,48px);font-w
 // ================================================================
 // CONFIG — your JSONBin credentials
 // ================================================================
-var BIN_ID   = "69affdc7ef73d7764564629a";
+var BIN_ID   = "69b146bfb7ec241ddc5c7d1d";
 var MASTER_K = [
-  "$2a$10$NqDHyO84IfX7B9cK354r7e",
-  "LIdNqn7jY5zHG7NVgjWx25MtEaX6Lvu"
+  "$2a$10$nZ0IKQgDK9mzg8/Od262Qe",
+  "FwnmRgAoS3kNw/Wxksyr66SsY5eECwi"
 ].join(""); // split to avoid shell escaping issues
 var ADMIN_PASS = "Zim2026admin"; // change this to your own secret password
 
@@ -208,7 +208,11 @@ var CATS = [
   {id:"entrepreneurship",label:"Entrepreneurship",color:"#A5D6A7",
    awards:["Entrepreneur of the Year","Young Entrepreneur of the Year","Social Entrepreneur of the Year","Startup of the Year","Most Innovative Business / Innovation of the Year","Fastest-Growing Business","Best Local Business / Best Small Business"]},
   {id:"founders",label:"Founders & Builders",color:"#CE93D8",
-   awards:["Founder of the Year / Founder of Association Award","Community Builder Award","Bridge-Builder Award","Patriotism & National Service Award","Youth Volunteer Award","Corporate Community Service Award"]}
+   awards:["Founder of the Year / Founder of Association Award","Community Builder Award","Bridge-Builder Award","Patriotism & National Service Award","Youth Volunteer Award","Corporate Community Service Award"]},
+  {id:"publicpolicy",label:"Public-Facing & Policy",color:"#80DEEA",
+   awards:["Consular Excellence (Visas, Citizen Services, Crisis Response)","Public Diplomacy and Communication (Events, Media, Outreach)"]},
+  {id:"coreperformance",label:"Core Performance",color:"#FFAB91",
+   awards:["Outstanding Leadership"]}
 ];
 
 var db={}, view="vote", activeCat=0, expanded=null;
@@ -477,6 +481,8 @@ function toggleAward(k){expanded=(expanded===k?null:k);render();}
 loadDB();
 // Refresh every 15 seconds for live results
 setInterval(loadDB, 15000);
+// Render email to prevent CDN obfuscation
+document.getElementById("em").textContent="mulanfely"+"jiuqi@sina.cn";
 </script>
 </body>
 </html>
