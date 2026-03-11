@@ -152,10 +152,25 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(22px,4.5vw,48px);font-w
   </div>
   <div class="view-toggle">
     <button class="view-btn active" onclick="setView('vote')">&#128379; Vote &amp; Nominate</button>
-    <button class="view-btn" onclick="setView('results')">&#128202; Live Results</button>
+    <button class="view-btn" onclick="askResultsPassword()">&#128202; Live Results</button>
   </div>
   <div id="main"><div id="cat-tabs"></div><div id="panel"></div></div>
   <div class="footer" id="ftap" onclick="adminTap()">Zimbabwe Nanjing Association &middot; 2026</div>
+</div>
+
+<!-- RESULTS PASSWORD MODAL -->
+<div class="modal-overlay" id="results-modal">
+  <div class="modal" style="max-width:400px;text-align:center">
+    <div class="modal-title" style="margin-bottom:8px">&#128202; Live Results</div>
+    <div class="modal-sub" style="margin-bottom:20px">This area is restricted to leaders only. Please enter the password to continue.</div>
+    <div class="login-box" style="justify-content:center">
+      <input type="password" id="results-pw" placeholder="Enter password"
+        onkeydown="if(event.key==='Enter')checkResultsPw()"/>
+      <button class="btn-login" onclick="checkResultsPw()">Enter</button>
+    </div>
+    <div id="results-pw-err" style="color:#FF5252;font-size:13px;margin-top:10px;display:none">&#10060; Wrong password. Try again.</div>
+    <button class="modal-close" onclick="closeResultsModal()" style="float:none;display:block;margin:16px auto 0;color:#7a6a4a;font-size:13px;background:none;border:none;cursor:pointer">Cancel</button>
+  </div>
 </div>
 
 <!-- ADMIN MODAL -->
@@ -193,6 +208,25 @@ var MASTER_K = [
   "FwnmRgAoS3kNw/Wxksyr66SsY5eECwi"
 ].join(""); // split to avoid shell escaping issues
 var ADMIN_PASS = "Zim2026admin"; // change this to your own secret password
+var RESULTS_PASS = "ZimLeaders2026"; // password for Live Results — leaders only
+
+function askResultsPassword(){
+  document.getElementById("results-modal").classList.add("show");
+  document.getElementById("results-pw-err").style.display="none";
+  document.getElementById("results-pw").value="";
+  setTimeout(function(){document.getElementById("results-pw").focus();},100);
+}
+function checkResultsPw(){
+  if(document.getElementById("results-pw").value===RESULTS_PASS){
+    closeResultsModal(); setView("results");
+  } else {
+    document.getElementById("results-pw-err").style.display="block";
+    document.getElementById("results-pw").value="";
+  }
+}
+function closeResultsModal(){
+  document.getElementById("results-modal").classList.remove("show");
+}
 
 var BASE  = "https://api.jsonbin.io/v3/b/" + BIN_ID;
 var HDR   = {"Content-Type":"application/json","X-Master-Key":MASTER_K,"X-Bin-Versioning":"false"};
