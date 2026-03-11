@@ -146,7 +146,6 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(22px,4.5vw,48px);font-w
 
   <div class="stats-bar">
     <div class="stat"><span class="stat-num" id="stat-nominees">0</span><span class="stat-lbl">Nominees</span></div>
-    <div class="stat"><span class="stat-num" id="stat-votes">0</span><span class="stat-lbl">Total Votes</span></div>
     <div class="stat"><span class="stat-num">29</span><span class="stat-lbl">Awards</span></div>
     <div class="stat"><span class="stat-num" id="stat-voted">0</span><span class="stat-lbl">Your Votes</span></div>
   </div>
@@ -436,7 +435,7 @@ function renderVote(){
       '<div class="award-header" onclick="toggleAward(\''+k+'\')">'+
       '<span class="award-name">'+award+'</span>'+
       '<span class="award-meta">';
-    if(noms.length) html+='<span class="badge-pill">'+noms.length+' nominees &middot; '+tot+' votes</span>';
+    if(noms.length) html+='<span class="badge-pill">'+noms.length+' nominees</span>';
     if(hasVoted) html+='<span style="font-size:16px">&#9989;</span>';
     html+='</span><span class="chevron'+(isOpen?" open":"")+'">&#9660;</span></div>';
 
@@ -451,12 +450,8 @@ function renderVote(){
         html+='<div class="empty-msg">No nominees yet &mdash; be the first!</div>';
       } else {
         noms.forEach(function(n,i){
-          var pct=tot>0?Math.round((n.votes||0)/tot*100):0;
           html+='<div class="nominee-row">'+
             '<span class="nom-name">'+n.name+'</span>'+
-            '<div class="bar-wrap">'+
-            '<div class="bar-bg"><div class="bar-fill" style="width:'+pct+'%"></div></div>'+
-            '<span class="bar-num">'+(n.votes||0)+'</span></div>'+
             '<button class="btn-vote'+(hasVoted?" voted":"")+'" '+
             (hasVoted?"disabled":"")+' '+
             'onclick="'+(hasVoted?"":"castVote('"+c.id+"',"+aIdx+","+i+")")+'">'+(hasVoted?"&#10003; Voted":"Vote")+
