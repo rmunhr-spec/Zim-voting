@@ -207,7 +207,7 @@ var MASTER_K = [
   "LIdNqn7jY5zHG7NVgjWx25MtEaX6Lvu"
 ].join(""); // split to avoid shell escaping issues
 var ADMIN_PASS = "Zim2026admin"; // change this to your own secret password
-var RESULTS_PASS = "18042026ZIDV"; // password for Live Results — leaders only
+var RESULTS_PASS = "ZimLeaders2026"; // password for Live Results — leaders only
 
 function askResultsPassword(){
   document.getElementById("results-modal").classList.add("show");
@@ -401,7 +401,6 @@ function renderAdmin(){
 // ── RENDER ───────────────────────────────────────────────────
 function render(){
   document.getElementById("stat-nominees").textContent=totalN();
-  document.getElementById("stat-votes").textContent=totalV();
   document.getElementById("stat-voted").textContent=voted.size;
   // cat tabs
   var tabs="";
