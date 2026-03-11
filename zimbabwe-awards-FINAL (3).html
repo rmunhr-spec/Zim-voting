@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zimbabwe Independence Awards 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#080e08;font-family:'Crimson Pro',Georgia,serif;color:#f5e6c8;min-height:100vh}
+.app{min-height:100vh;background:radial-gradient(ellipse at 15% 15%,rgba(0,100,0,.22) 0%,transparent 55%),radial-gradient(ellipse at 85% 85%,rgba(180,0,0,.18) 0%,transparent 55%),linear-gradient(160deg,#0c1a0c 0%,#180800 45%,#100e00 75%,#081408 100%)}
+.header{text-align:center;padding:44px 20px 28px}
+.header::after{content:'';display:block;width:75%;height:2px;background:linear-gradient(90deg,transparent,#FFD700,#006400,#DC143C,#FFD700,transparent);margin:26px auto 0}
+.org-badge{display:inline-block;background:linear-gradient(135deg,#FFD700,#e07b00);color:#1a0800;font-family:'Cinzel Decorative',serif;font-size:9px;font-weight:700;letter-spacing:3px;padding:5px 16px;border-radius:20px;margin-bottom:18px;text-transform:uppercase}
+h1{font-family:'Cinzel Decorative',serif;font-size:clamp(22px,4.5vw,48px);font-weight:900;line-height:1.15;background:linear-gradient(135deg,#FFD700 0%,#FFF8E1 40%,#FFD700 70%,#e08000 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{font-size:15px;color:#b8a07a;letter-spacing:4px;text-transform:uppercase;font-weight:300;margin-top:8px}
+.loc{font-size:12px;color:#FFD700;letter-spacing:3px;text-transform:uppercase;opacity:.8;margin-top:6px}
+.deadline{background:linear-gradient(90deg,rgba(180,0,0,.1),rgba(180,0,0,.25),rgba(180,0,0,.1));border-top:1px solid rgba(220,20,60,.4);border-bottom:1px solid rgba(220,20,60,.4);text-align:center;padding:9px 16px;font-size:12px;letter-spacing:2px;color:#FF8A80;text-transform:uppercase}
+.deadline strong{color:#FF5252}
+
+/* CONNECTION STATUS BAR */
+.conn-bar{display:flex;align-items:center;justify-content:center;gap:8px;padding:7px 16px;font-size:11px;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.05)}
+.conn-dot{width:8px;height:8px;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.conn-bar.connected{background:rgba(0,100,0,.15);color:#4CAF50}
+.conn-bar.connected .conn-dot{background:#4CAF50}
+.conn-bar.connecting{background:rgba(180,140,0,.12);color:#FFD700}
+.conn-bar.connecting .conn-dot{background:#FFD700}
+.conn-bar.error{background:rgba(180,0,0,.15);color:#FF5252}
+.conn-bar.error .conn-dot{background:#FF5252;animation:none}
+.conn-retry{background:none;border:1px solid currentColor;border-radius:10px;color:inherit;font-size:10px;padding:2px 8px;cursor:pointer;margin-left:8px}
+
+.stats-bar{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;padding:14px 16px;background:rgba(255,215,0,.04);border-bottom:1px solid rgba(255,215,0,.1)}
+.stat{text-align:center}
+.stat-num{display:block;font-family:'Cinzel Decorative',serif;font-size:22px;color:#FFD700}
+.stat-lbl{font-size:9px;letter-spacing:2px;color:#8a7a5a;text-transform:uppercase}
+.view-toggle{display:flex;justify-content:center;gap:12px;padding:22px 16px 6px;flex-wrap:wrap}
+.view-btn{background:rgba(255,255,255,.04);border:1px solid rgba(255,215,0,.2);color:#b8a07a;font-family:'Crimson Pro',serif;font-size:14px;letter-spacing:1px;padding:9px 26px;border-radius:24px;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.view-btn:hover{border-color:rgba(255,215,0,.5);color:#FFD700}
+.view-btn.active{background:rgba(255,215,0,.12);border-color:#FFD700;color:#FFD700;font-weight:600}
+#cat-tabs{display:flex;justify-content:center;gap:8px;padding:10px 16px 4px;flex-wrap:wrap}
+.tab-btn{background:rgba(255,255,255,.03);border:1px solid rgba(255,215,0,.15);color:#a09070;font-family:'Crimson Pro',serif;font-size:12px;letter-spacing:1px;padding:7px 15px;border-radius:20px;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.tab-btn:hover{border-color:rgba(255,215,0,.4);color:#FFD700}
+.tab-btn.active{background:rgba(255,215,0,.1);font-weight:600}
+#main{padding:12px 16px 70px;max-width:860px;margin:0 auto}
+.cat-header{text-align:center;padding:18px 0 24px}
+.cat-title{font-family:'Cinzel Decorative',serif;font-size:clamp(16px,2.5vw,26px);font-weight:700;margin-bottom:5px}
+.cat-sub{font-size:13px;color:#7a6a4a;letter-spacing:1px}
+.divider{display:flex;align-items:center;gap:10px;margin:2px 0 18px;opacity:.4}
+.dline{flex:1;height:1px;background:#FFD700}
+.ddot{width:5px;height:5px;background:#FFD700;border-radius:50%}
+.award-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,215,0,.1);border-radius:12px;margin-bottom:14px;overflow:hidden;transition:border-color .2s}
+.award-card:hover,.award-card.open{border-color:rgba(255,215,0,.28)}
+.award-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer;gap:10px}
+.award-name{font-size:16px;font-weight:600;color:#f0dfc0;flex:1}
+.award-meta{display:flex;align-items:center;gap:8px}
+.badge-pill{background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.25);color:#FFD700;font-size:10px;letter-spacing:1px;padding:2px 9px;border-radius:10px;white-space:nowrap}
+.chevron{color:#7a6a4a;font-size:11px;transition:transform .2s}
+.chevron.open{transform:rotate(180deg)}
+.award-panel{border-top:1px solid rgba(255,215,0,.07);padding:18px}
+.nominate-row{display:flex;gap:9px;margin-bottom:18px}
+.nominate-row input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,215,0,.22);border-radius:8px;color:#f5e6c8;font-family:'Crimson Pro',serif;font-size:15px;padding:9px 13px;outline:none;transition:border-color .2s}
+.nominate-row input::placeholder{color:#5a4a30}
+.nominate-row input:focus{border-color:#FFD700}
+.btn-add{background:linear-gradient(135deg,#004d00,#1a7a1a);border:none;border-radius:8px;color:#fff;font-family:'Cinzel Decorative',serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:9px 16px;cursor:pointer;white-space:nowrap;transition:opacity .2s}
+.btn-add:hover{opacity:.82}
+.btn-add:disabled{opacity:.4;cursor:not-allowed}
+.empty-msg{text-align:center;color:#5a4a30;font-style:italic;font-size:14px;padding:14px 0}
+.nominee-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.nominee-row:last-child{border-bottom:none}
+.nom-name{flex:1;font-size:15px;color:#e8d4a8}
+.bar-wrap{flex:2;display:flex;align-items:center;gap:7px}
+.bar-bg{flex:1;height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#006400,#FFD700);transition:width .5s}
+.bar-num{font-size:12px;color:#FFD700;font-weight:700;min-width:22px;text-align:right}
+.btn-vote{background:linear-gradient(135deg,#7a0000,#c01030);border:none;border-radius:6px;color:#fff;font-family:'Cinzel Decorative',serif;font-size:9px;font-weight:700;letter-spacing:1px;padding:7px 13px;cursor:pointer;white-space:nowrap;transition:all .2s}
+.btn-vote:hover:not(.voted):not(:disabled){opacity:.82;transform:scale(1.04)}
+.btn-vote.voted{background:linear-gradient(135deg,#1a3a1a,#2a5a2a);cursor:default}
+.btn-vote:disabled{opacity:.5;cursor:not-allowed}
+.results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;padding:16px 0}
+.res-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,215,0,.1);border-radius:12px;padding:18px;transition:border-color .2s}
+.res-card:hover{border-color:rgba(255,215,0,.25)}
+.res-cat{font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px}
+.res-award{font-family:'Cinzel Decorative',serif;font-size:12px;color:#FFD700;margin-bottom:13px;font-weight:700}
+.res-leader{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.lname{flex:1;font-size:16px;font-weight:600;color:#f0dfc0}
+.lvotes{background:linear-gradient(135deg,#FFD700,#e08000);color:#1a0800;font-size:11px;font-weight:700;padding:2px 9px;border-radius:9px}
+.res-runner{font-size:12px;color:#7a6a4a;padding-left:26px;margin-top:3px}
+.res-empty{font-size:12px;color:#5a4a30;font-style:italic}
+.res-none{font-size:12px;color:#3a2a18;font-style:italic}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(60px);font-family:'Cinzel Decorative',serif;font-size:11px;letter-spacing:1px;padding:11px 22px;border-radius:22px;z-index:9999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.ok{background:linear-gradient(135deg,#004d00,#1a7a1a);color:#fff}
+.toast.warn{background:linear-gradient(135deg,#7a3a00,#c06000);color:#fff}
+.toast.err{background:linear-gradient(135deg,#7a0000,#c01030);color:#fff}
+.loading-overlay{position:fixed;inset:0;background:rgba(8,14,8,.92);display:flex;align-items:center;justify-content:center;z-index:1000;flex-direction:column;gap:16px}
+.spinner{width:44px;height:44px;border:3px solid rgba(255,215,0,.2);border-top-color:#FFD700;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-family:'Cinzel Decorative',serif;font-size:12px;color:#FFD700;letter-spacing:2px}
+.saving-dot{position:fixed;top:14px;right:14px;width:10px;height:10px;border-radius:50%;background:#FFD700;opacity:0;transition:opacity .3s;z-index:500}
+.saving-dot.show{opacity:1;animation:pulse 1s infinite}
+.footer{text-align:center;padding:24px;color:#181008;font-size:11px;letter-spacing:2px;user-select:none;cursor:default}
+/* ADMIN */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:2000;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.show{display:flex}
+.modal{background:linear-gradient(160deg,#0c1a0c,#1a0800);border:1px solid rgba(255,215,0,.35);border-radius:16px;width:100%;max-width:660px;max-height:88vh;overflow-y:auto;padding:28px 24px}
+.modal-title{font-family:'Cinzel Decorative',serif;font-size:20px;color:#FFD700;margin-bottom:4px}
+.modal-sub{font-size:13px;color:#7a6a4a;margin-bottom:22px}
+.modal-close{float:right;background:none;border:none;color:#7a6a4a;font-size:24px;cursor:pointer;line-height:1}
+.modal-close:hover{color:#FFD700}
+.login-box{display:flex;gap:10px;margin-bottom:8px}
+.login-box input{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,215,0,.25);border-radius:8px;color:#f5e6c8;font-family:'Crimson Pro',serif;font-size:15px;padding:10px 14px;outline:none}
+.login-box input:focus{border-color:#FFD700}
+.btn-login{background:linear-gradient(135deg,#7a4400,#c07000);border:none;border-radius:8px;color:#fff;font-family:'Cinzel Decorative',serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:10px 18px;cursor:pointer}
+.btn-refresh{background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:8px;color:#FFD700;font-family:'Cinzel Decorative',serif;font-size:10px;padding:8px 16px;cursor:pointer;margin-bottom:20px}
+.admin-cat-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#9e8a6e;margin:18px 0 4px}
+.admin-award-lbl{font-size:13px;font-weight:600;color:#c8b078;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.admin-row{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);flex-wrap:wrap}
+.admin-row:last-child{border-bottom:none}
+.admin-nom-name{flex:1;font-size:14px;color:#e8d4a8;min-width:120px}
+.admin-votes{font-size:12px;color:#FFD700;min-width:55px}
+.btn-sm{border:none;border-radius:6px;color:#fff;font-size:10px;font-weight:700;padding:5px 11px;cursor:pointer;white-space:nowrap}
+.btn-sm:hover{opacity:.8}
+.btn-del{background:linear-gradient(135deg,#7a0000,#b01020)}
+.btn-rv{background:linear-gradient(135deg,#4a3a00,#7a6000)}
+.btn-ra{background:linear-gradient(135deg,#1a2a5a,#2a4a9a);font-size:9px}
+@media(max-width:600px){.nominee-row{flex-wrap:wrap}.bar-wrap{order:3;flex:1 1 100%}.btn-vote{order:2}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="org-badge">Zimbabwe Nanjing Association</div>
+    <h1>Zimbabwe Independence<br/>Awards Ceremony</h1>
+    <div class="sub">Official Voting Platform</div>
+    <div class="loc">18 April 2026 &middot; Nanjing, China</div>
+  </div>
+  <div class="deadline">Nomination deadline: <strong>25 March 2026</strong> &nbsp;&middot;&nbsp; Contact: mulanfelyjiuqi@sina.cn</div>
+
+  <!-- LIVE CONNECTION STATUS -->
+  <div class="conn-bar connecting" id="conn-bar">
+    <div class="conn-dot"></div>
+    <span id="conn-text">Connecting to database...</span>
+    <button class="conn-retry" onclick="loadDB()" id="conn-retry" style="display:none">Retry</button>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-num" id="stat-nominees">0</span><span class="stat-lbl">Nominees</span></div>
+    <div class="stat"><span class="stat-num" id="stat-votes">0</span><span class="stat-lbl">Total Votes</span></div>
+    <div class="stat"><span class="stat-num">26</span><span class="stat-lbl">Awards</span></div>
+    <div class="stat"><span class="stat-num" id="stat-voted">0</span><span class="stat-lbl">Your Votes</span></div>
+  </div>
+  <div class="view-toggle">
+    <button class="view-btn active" onclick="setView('vote')">&#128379; Vote &amp; Nominate</button>
+    <button class="view-btn" onclick="setView('results')">&#128202; Live Results</button>
+  </div>
+  <div id="main"><div id="cat-tabs"></div><div id="panel"></div></div>
+  <div class="footer" id="ftap" onclick="adminTap()">Zimbabwe Nanjing Association &middot; 2026</div>
+</div>
+
+<!-- ADMIN MODAL -->
+<div class="modal-overlay" id="admin-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeAdmin()">&#x2715;</button>
+    <div class="modal-title">&#128272; Admin Panel</div>
+    <div class="modal-sub">Delete nominees or reset votes to fix mistakes</div>
+    <div id="admin-login">
+      <div class="login-box">
+        <input type="password" id="admin-pw" placeholder="Enter admin password"
+          onkeydown="if(event.key==='Enter')checkPw()"/>
+        <button class="btn-login" onclick="checkPw()">Enter</button>
+      </div>
+      <div id="pw-err" style="color:#FF5252;font-size:13px;margin-top:8px;display:none">&#10060; Wrong password. Try again.</div>
+    </div>
+    <div id="admin-panel" style="display:none">
+      <button class="btn-refresh" onclick="loadDB().then(renderAdmin)">&#8635; Refresh Data</button>
+      <div id="admin-content"></div>
+    </div>
+  </div>
+</div>
+
+<div class="loading-overlay" id="loader"><div class="spinner"></div><div class="loading-text">Connecting...</div></div>
+<div class="saving-dot" id="saving-dot"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ================================================================
+// CONFIG — your JSONBin credentials
+// ================================================================
+var BIN_ID   = "69affdc7ef73d7764564629a";
+var MASTER_K = [
+  "$2a$10$NqDHyO84IfX7B9cK354r7e",
+  "LIdNqn7jY5zHG7NVgjWx25MtEaX6Lvu"
+].join(""); // split to avoid shell escaping issues
+var ADMIN_PASS = "Zim2026admin"; // change this to your own secret password
+
+var BASE  = "https://api.jsonbin.io/v3/b/" + BIN_ID;
+var HDR   = {"Content-Type":"application/json","X-Master-Key":MASTER_K,"X-Bin-Versioning":"false"};
+
+// ================================================================
+var CATS = [
+  {id:"sports",label:"Sports",color:"#FFD700",
+   awards:["Best Athlete of the Year","Best Offensive Player","Best Defensive Player","Best Goalkeeper","Rookie of the Year","Sportsmanship Award"]},
+  {id:"shipping",label:"Shipping & Business",color:"#4FC3F7",
+   awards:["Logistics & Shipping Excellence Award","Customer Service in Shipping Award","Sponsor of the Year","Business of the Year (Overall)"]},
+  {id:"charity",label:"Charity & Community",color:"#EF9A9A",
+   awards:["Community Service / Community Impact Award","Volunteer of the Year","Lifetime of Service Award"]},
+  {id:"entrepreneurship",label:"Entrepreneurship",color:"#A5D6A7",
+   awards:["Entrepreneur of the Year","Young Entrepreneur of the Year","Social Entrepreneur of the Year","Startup of the Year","Most Innovative Business / Innovation of the Year","Fastest-Growing Business","Best Local Business / Best Small Business"]},
+  {id:"founders",label:"Founders & Builders",color:"#CE93D8",
+   awards:["Founder of the Year / Founder of Association Award","Community Builder Award","Bridge-Builder Award","Patriotism & National Service Award","Youth Volunteer Award","Corporate Community Service Award"]}
+];
+
+var db={}, view="vote", activeCat=0, expanded=null;
+var voted = new Set(JSON.parse(localStorage.getItem("zim2026v")||"[]"));
+var saving=false, taps=0, tapT=null, connected=false;
+
+// ── CONNECTION STATUS ─────────────────────────────────────────
+function setConn(state, msg) {
+  var bar=document.getElementById("conn-bar");
+  var txt=document.getElementById("conn-text");
+  var btn=document.getElementById("conn-retry");
+  bar.className="conn-bar "+state;
+  txt.textContent=msg;
+  btn.style.display = state==="error"?"inline":"none";
+  connected = state==="connected";
+}
+
+// ── DB LOAD/SAVE ─────────────────────────────────────────────
+async function loadDB() {
+  setConn("connecting","Connecting to database...");
+  try {
+    var r = await fetch(BASE+"/latest", {headers:HDR});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    var j = await r.json();
+    db = j.record || {};
+    setConn("connected","Live \u2014 updates every 15 seconds");
+    document.getElementById("loader").style.display="none";
+    render();
+  } catch(e) {
+    setConn("error","Could not connect \u2014 "+e.message);
+    document.getElementById("loader").style.display="none";
+    showToast("Database error: "+e.message,"err");
+  }
+}
+
+async function saveDB() {
+  if(saving)return; saving=true;
+  document.getElementById("saving-dot").classList.add("show");
+  try {
+    var r = await fetch(BASE, {method:"PUT",headers:HDR,body:JSON.stringify(db)});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    setConn("connected","Live \u2014 just saved");
+  } catch(e) {
+    showToast("Save failed: "+e.message,"err");
+  }
+  saving=false;
+  document.getElementById("saving-dot").classList.remove("show");
+}
+
+// ── HELPERS ──────────────────────────────────────────────────
+function K(c,a){return c+"_"+a;}
+function getSorted(c,a){
+  return (db[K(c,a)]||[]).slice().sort(function(x,y){return(y.votes||0)-(x.votes||0);});
+}
+function totalV(){return Object.values(db).flat().reduce(function(s,n){return s+(n.votes||0);},0);}
+function totalN(){return Object.values(db).flat().length;}
+
+// ── ACTIONS ──────────────────────────────────────────────────
+async function nominate(catId,aIdx){
+  var k=K(catId,aIdx);
+  var inp=document.getElementById("inp_"+k);
+  var name=(inp?inp.value:"").trim(); if(!name)return;
+  var list=db[k]||[];
+  for(var i=0;i<list.length;i++){
+    if(list[i].name.toLowerCase()===name.toLowerCase()){showToast("Already nominated!","warn");return;}
+  }
+  inp.value=""; inp.disabled=true;
+  var btn=document.getElementById("btn_"+k); if(btn)btn.disabled=true;
+  db[k]=list.concat([{name:name,votes:0}]);
+  render(); await saveDB();
+  inp.disabled=false; if(btn)btn.disabled=false;
+  showToast('"'+name+'" nominated! \u2713');
+}
+
+async function castVote(catId,aIdx,idx){
+  var k=K(catId,aIdx);
+  if(voted.has(k)){showToast("You already voted here!","warn");return;}
+  var noms=getSorted(catId,aIdx); var nom=noms[idx];
+  var list=db[k]||[]; var orig=-1;
+  for(var i=0;i<list.length;i++){if(list[i].name===nom.name){orig=i;break;}}
+  if(orig<0)return;
+  list[orig].votes=(list[orig].votes||0)+1; db[k]=list;
+  voted.add(k); localStorage.setItem("zim2026v",JSON.stringify(Array.from(voted)));
+  render(); await saveDB();
+  showToast("Voted for "+nom.name+"! \u2713");
+}
+
+// ── ADMIN ────────────────────────────────────────────────────
+function adminTap(){
+  taps++; clearTimeout(tapT);
+  tapT=setTimeout(function(){taps=0;},2000);
+  if(taps>=5){taps=0;document.getElementById("admin-modal").classList.add("show");setTimeout(function(){document.getElementById("admin-pw").focus();},100);}
+}
+function checkPw(){
+  if(document.getElementById("admin-pw").value===ADMIN_PASS){
+    document.getElementById("admin-login").style.display="none";
+    document.getElementById("admin-panel").style.display="block";
+    renderAdmin();
+  } else {
+    document.getElementById("pw-err").style.display="block";
+    document.getElementById("admin-pw").value="";
+  }
+}
+function closeAdmin(){
+  document.getElementById("admin-modal").classList.remove("show");
+  document.getElementById("admin-login").style.display="block";
+  document.getElementById("admin-panel").style.display="none";
+  document.getElementById("admin-pw").value="";
+  document.getElementById("pw-err").style.display="none";
+}
+async function delNominee(catId,aIdx,name){
+  if(!confirm('Delete "'+name+'"?\nThis cannot be undone.'))return;
+  var k=K(catId,aIdx); db[k]=(db[k]||[]).filter(function(n){return n.name!==name;});
+  await saveDB(); render(); renderAdmin(); showToast('"'+name+'" deleted');
+}
+async function resetOneVotes(catId,aIdx,name){
+  if(!confirm('Reset all votes for "'+name+'" to 0?'))return;
+  var k=K(catId,aIdx);
+  db[k]=(db[k]||[]).map(function(n){return n.name===name?{name:n.name,votes:0}:n;});
+  await saveDB(); render(); renderAdmin(); showToast('Votes reset for "'+name+'"');
+}
+async function resetAllVotes(catId,aIdx){
+  var c=CATS.filter(function(x){return x.id===catId;})[0];
+  var award=c?c.awards[aIdx]:"this award";
+  if(!confirm('Reset ALL votes for:\n"'+award+'"?'))return;
+  var k=K(catId,aIdx);
+  db[k]=(db[k]||[]).map(function(n){return{name:n.name,votes:0};});
+  await saveDB(); render(); renderAdmin(); showToast("All votes reset");
+}
+function renderAdmin(){
+  var html="";
+  CATS.forEach(function(c){
+    c.awards.forEach(function(award,aIdx){
+      var list=db[K(c.id,aIdx)]||[]; if(!list.length)return;
+      html+='<div class="admin-cat-lbl">'+c.label+'</div>';
+      html+='<div class="admin-award-lbl">'+award+
+        ' <button class="btn-sm btn-ra" onclick="resetAllVotes(\''+c.id+'\','+aIdx+')">Reset All Votes</button></div>';
+      list.forEach(function(n){
+        var esc=n.name.replace(/\\/g,"\\\\").replace(/'/g,"\\'");
+        html+='<div class="admin-row">'+
+          '<span class="admin-nom-name">'+n.name+'</span>'+
+          '<span class="admin-votes">'+(n.votes||0)+' vote'+(n.votes!==1?'s':'')+'</span>'+
+          '<button class="btn-sm btn-rv" onclick="resetOneVotes(\''+c.id+'\','+aIdx+',\''+esc+'\')">Reset Votes</button>'+
+          '<button class="btn-sm btn-del" onclick="delNominee(\''+c.id+'\','+aIdx+',\''+esc+'\')">&#128465; Delete</button>'+
+          '</div>';
+      });
+    });
+  });
+  if(!html)html='<div style="text-align:center;color:#5a4a30;font-style:italic;padding:24px">No nominees yet.</div>';
+  document.getElementById("admin-content").innerHTML=html;
+}
+
+// ── RENDER ───────────────────────────────────────────────────
+function render(){
+  document.getElementById("stat-nominees").textContent=totalN();
+  document.getElementById("stat-votes").textContent=totalV();
+  document.getElementById("stat-voted").textContent=voted.size;
+  // cat tabs
+  var tabs="";
+  CATS.forEach(function(c,i){
+    var active=activeCat===i;
+    tabs+='<button class="tab-btn'+(active?" active":"")+'" '+
+      'style="'+(active?"border-color:"+c.color+";color:"+c.color:"")+'" '+
+      'onclick="setCat('+i+')">'+c.label+'</button>';
+  });
+  document.getElementById("cat-tabs").innerHTML=tabs;
+  if(view==="vote")renderVote(); else renderResults();
+  document.querySelectorAll(".view-btn").forEach(function(b,i){
+    b.classList.toggle("active",i===(view==="vote"?0:1));
+  });
+}
+
+function renderVote(){
+  var c=CATS[activeCat];
+  var html='<div class="cat-header">'+
+    '<div class="cat-title" style="color:'+c.color+'">'+c.label+'</div>'+
+    '<div class="cat-sub">'+c.awards.length+' awards &middot; Tap an award to nominate or vote</div></div>'+
+    '<div class="divider"><div class="dline"></div><div class="ddot"></div><div class="dline"></div></div>';
+
+  c.awards.forEach(function(award,aIdx){
+    var k=K(c.id,aIdx);
+    var noms=getSorted(c.id,aIdx);
+    var tot=noms.reduce(function(s,n){return s+(n.votes||0);},0);
+    var isOpen=expanded===k, hasVoted=voted.has(k);
+
+    html+='<div class="award-card'+(isOpen?" open":"")+'">'+
+      '<div class="award-header" onclick="toggleAward(\''+k+'\')">'+
+      '<span class="award-name">'+award+'</span>'+
+      '<span class="award-meta">';
+    if(noms.length) html+='<span class="badge-pill">'+noms.length+' nominees &middot; '+tot+' votes</span>';
+    if(hasVoted) html+='<span style="font-size:16px">&#9989;</span>';
+    html+='</span><span class="chevron'+(isOpen?" open":"")+'">&#9660;</span></div>';
+
+    if(isOpen){
+      html+='<div class="award-panel">'+
+        '<div class="nominate-row">'+
+        '<input id="inp_'+k+'" placeholder="Type nominee\'s full name..." '+
+        'onkeydown="if(event.key===\'Enter\')nominate(\''+c.id+'\','+aIdx+')"/>'+
+        '<button id="btn_'+k+'" class="btn-add" onclick="nominate(\''+c.id+'\','+aIdx+')">+ Nominate</button>'+
+        '</div>';
+      if(!noms.length){
+        html+='<div class="empty-msg">No nominees yet &mdash; be the first!</div>';
+      } else {
+        noms.forEach(function(n,i){
+          var pct=tot>0?Math.round((n.votes||0)/tot*100):0;
+          html+='<div class="nominee-row">'+
+            '<span class="nom-name">'+n.name+'</span>'+
+            '<div class="bar-wrap">'+
+            '<div class="bar-bg"><div class="bar-fill" style="width:'+pct+'%"></div></div>'+
+            '<span class="bar-num">'+(n.votes||0)+'</span></div>'+
+            '<button class="btn-vote'+(hasVoted?" voted":"")+'" '+
+            (hasVoted?"disabled":"")+' '+
+            'onclick="'+(hasVoted?"":"castVote('"+c.id+"',"+aIdx+","+i+")")+'">'+(hasVoted?"&#10003; Voted":"Vote")+
+            '</button></div>';
+        });
+      }
+      html+='</div>';
+    }
+    html+='</div>';
+  });
+  document.getElementById("panel").innerHTML=html;
+}
+
+function renderResults(){
+  var html='<div class="cat-header">'+
+    '<div class="cat-title" style="color:#FFD700">&#128202; Live Leaderboard</div>'+
+    '<div class="cat-sub">Current leaders &mdash; refreshes every 15 seconds</div></div>'+
+    '<div class="divider"><div class="dline"></div><div class="ddot"></div><div class="dline"></div></div>'+
+    '<div class="results-grid">';
+  CATS.forEach(function(c){
+    c.awards.forEach(function(award,aIdx){
+      var noms=getSorted(c.id,aIdx); var leader=noms[0];
+      html+='<div class="res-card">'+
+        '<div class="res-cat" style="color:'+c.color+'">'+c.label+'</div>'+
+        '<div class="res-award">'+award+'</div>';
+      if(leader&&(leader.votes||0)>0){
+        html+='<div class="res-leader"><span style="font-size:18px">&#128081;</span>'+
+          '<span class="lname">'+leader.name+'</span>'+
+          '<span class="lvotes">'+leader.votes+'v</span></div>';
+        noms.slice(1,3).forEach(function(n,i){
+          html+='<div class="res-runner">'+(i===0?"&#129356;":"&#129357;")+' '+n.name+' &mdash; '+(n.votes||0)+'v</div>';
+        });
+      } else if(noms.length){
+        html+='<div class="res-empty">'+noms.length+' nominee'+(noms.length>1?"s":"")+' &mdash; no votes yet</div>';
+      } else {
+        html+='<div class="res-none">No nominees yet</div>';
+      }
+      html+='</div>';
+    });
+  });
+  html+="</div>";
+  document.getElementById("panel").innerHTML=html;
+}
+
+function showToast(msg,type){
+  type=type||"ok";
+  var t=document.getElementById("toast");
+  t.textContent=msg; t.className="toast show "+type;
+  clearTimeout(t._t); t._t=setTimeout(function(){t.className="toast";},3000);
+}
+function setView(v){view=v;render();}
+function setCat(i){activeCat=i;expanded=null;render();}
+function toggleAward(k){expanded=(expanded===k?null:k);render();}
+
+// ── INIT ─────────────────────────────────────────────────────
+loadDB();
+// Refresh every 15 seconds for live results
+setInterval(loadDB, 15000);
+</script>
+</body>
+</html>
