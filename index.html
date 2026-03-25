@@ -135,7 +135,7 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(22px,4.5vw,48px);font-w
     <div class="sub">Official Voting Platform</div>
     <div class="loc">18 April 2026 &middot; Nanjing, China</div>
   </div>
-  <div class="deadline">Nomination deadline: <strong>25 March 2026</strong> &nbsp;&middot;&nbsp; Contact: <span id="em"></span></div>
+  <div class="deadline">&#128274; <strong>Voting is now closed</strong> &nbsp;&middot;&nbsp; Thank you for participating! &nbsp;&middot;&nbsp; Awards Ceremony: <strong>18 April 2026</strong></div>
 
   <!-- LIVE CONNECTION STATUS -->
   <div class="conn-bar connecting" id="conn-bar">
@@ -207,7 +207,8 @@ var MASTER_K = [
   "LIdNqn7jY5zHG7NVgjWx25MtEaX6Lvu"
 ].join(""); // split to avoid shell escaping issues
 var ADMIN_PASS = "Zim2026admin"; // change this to your own secret password
-var RESULTS_PASS = "18042026ZIDV"; // password for Live Results — leaders only
+var RESULTS_PASS = "ZimLeaders2026"; // password for Live Results — leaders only
+var VOTING_CLOSED = true; // set to false to reopen voting
 
 function askResultsPassword(){
   document.getElementById("results-modal").classList.add("show");
@@ -305,6 +306,7 @@ function totalN(){return Object.values(db).flat().length;}
 
 // ── ACTIONS ──────────────────────────────────────────────────
 async function nominate(catId,aIdx){
+  if(VOTING_CLOSED){showToast("Voting is now closed!","warn");return;}
   var k=K(catId,aIdx);
   var inp=document.getElementById("inp_"+k);
   var name=(inp?inp.value:"").trim(); if(!name)return;
@@ -321,6 +323,7 @@ async function nominate(catId,aIdx){
 }
 
 async function castVote(catId,aIdx,idx){
+  if(VOTING_CLOSED){showToast("Voting is now closed!","warn");return;}
   var k=K(catId,aIdx);
   if(voted.has(k)){showToast("You already voted here!","warn");return;}
   var noms=getSorted(catId,aIdx); var nom=noms[idx];
