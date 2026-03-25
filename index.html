@@ -158,12 +158,15 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(22px,4.5vw,48px);font-w
 </div>
 
 <!-- VOTING CLOSED FUNNY POPUP -->
-<div class="modal-overlay" id="closed-modal">
-  <div class="modal" style="max-width:420px;text-align:center">
+<div class="modal-overlay" id="closed-modal" onclick="document.getElementById('closed-modal').classList.remove('show')">
+  <div class="modal" style="max-width:420px;text-align:center;font-family:'Crimson Pro',Georgia,serif">
     <div style="font-size:52px;margin-bottom:12px">😂</div>
-    <div class="modal-title" style="margin-bottom:12px;font-size:18px">MUKUDA KU VOTER AFTER DEADLINE HERE GUYS, hmmm MISWAI 😂</div>
-    <div class="modal-sub" style="margin-bottom:20px;font-size:14px">Voting is now closed. See you at the ceremony on <strong style="color:#FFD700">18 April 2026!</strong> 🇿🇼🏆</div>
-    <button class="btn-login" onclick="document.getElementById('closed-modal').classList.remove('show')" style="margin:0 auto">OK, My Bad 😅</button>
+    <div style="font-family:Arial,sans-serif;font-size:17px;color:#f0dfc0;line-height:1.6;margin-bottom:20px">
+      MUKUDA KU VOTER AFTER DEADLINE HERE GUYS, hmmm MISWAI 😂
+      <br/><br/>
+      Toonana musiwa 18 April, musakangamwe ma suits nema dress ka. DRESS TO KILL FAM ..Love you all ❤️
+    </div>
+    <button onclick="document.getElementById('closed-modal').classList.remove('show')" style="background:none;border:none;font-size:36px;cursor:pointer">🇿🇼</button>
   </div>
 </div>
 <div class="modal-overlay" id="results-modal">
